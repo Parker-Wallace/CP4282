@@ -1,12 +1,15 @@
 import Movie from './Movie'
+import Card from 'react-bootstrap/Card';
+
 
 function MovieList({Movies}) {
     return (
-        <section>
+        <Card><div>
                 {Movies.movies.map((movie) => (
                    <Movie name={movie.name} year={movie.year} rating={movie.rating}></Movie>
-    ))}
-        </section>
+))}
+        </div></Card>
+        
     )
 }
 
