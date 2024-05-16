@@ -1,10 +1,6 @@
 import Weather from './Weather'
-import localweather from './StJohnsWeather.json'
 
-
-
-
-function WeatherList() {
+function WeatherList({localweather}) {
     return (
         <section>
             <h1>{localweather.city}</h1>
@@ -15,4 +11,4 @@ function WeatherList() {
     )
     
 }
-export default WeatherList
+export default WeatherList 

@@ -12,4 +12,4 @@ function Weather(prop) {
 }
 
 
-export default Weather;
+export default Weather; 
