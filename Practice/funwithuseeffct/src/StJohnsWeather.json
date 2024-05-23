@@ -1,0 +1,47 @@
+{
+	"city":"St Jonn's",
+	"forecast": [
+	   {
+		  "day":"Monday",
+		  "temp":"10 degrees",
+		  "precip":"4mm",
+		  "wind":"13km/h"
+	   },
+	   {
+		  "day":"Tuesday",
+		  "temp":"-1 degrees",
+		  "precip":"0mm",
+		  "wind":"2km/h"
+	   },
+	   {
+		  "day":"Wednesday",
+		  "temp":"4 degrees",
+		  "precip":"12mm",
+		  "wind":"22km/h"
+	   },
+	   {
+		  "day":"Thursday",
+		  "temp":"7 degrees",
+		  "precip":"0mm",
+		  "wind":"2km/h"
+	   },
+	   {
+		  "day":"Friday",
+		  "temp":"-3 degrees",
+		  "precip":"0mm",
+		  "wind":"34km/h"
+	   },
+	   {
+		  "day":"Saturday",
+		  "temp":"11 degrees",
+		  "precip":"2mm",
+		  "wind":"3km/h"
+	   },
+	   {
+		  "day":"Sunday",
+		  "temp":"5 degrees",
+		  "precip":"3mm",
+		  "wind":"16km/h"
+	   }
+	]
+}
