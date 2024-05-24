@@ -1,0 +1,47 @@
+{
+	"city":"Ottawa",
+	"forecast": [
+	   {
+		  "day":"Monday",
+		  "temp":"13 degrees",
+		  "precip":"5mm",
+		  "wind":"11km/h"
+	   },
+	   {
+		  "day":"Tuesday",
+		  "temp":"1 degrees",
+		  "precip":"10mm",
+		  "wind":"22km/h"
+	   },
+	   {
+		  "day":"Wednesday",
+		  "temp":"14 degrees",
+		  "precip":"2mm",
+		  "wind":"2km/h"
+	   },
+	   {
+		  "day":"Thursday",
+		  "temp":"11 degrees",
+		  "precip":"12mm",
+		  "wind":"22km/h"
+	   },
+	   {
+		  "day":"Friday",
+		  "temp":"12 degrees",
+		  "precip":"0mm",
+		  "wind":"3km/h"
+	   },
+	   {
+		  "day":"Saturday",
+		  "temp":"10 degrees",
+		  "precip":"0mm",
+		  "wind":"17km/h"
+	   },
+	   {
+		  "day":"Sunday",
+		  "temp":"14 degrees",
+		  "precip":"2mm",
+		  "wind":"19km/h"
+	   }
+	]
+}
