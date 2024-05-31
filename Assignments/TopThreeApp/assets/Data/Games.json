@@ -1,0 +1,21 @@
+{
+  "gamedata" :  [
+    {
+    "name":   "CastleVania III Dracula's Curse",
+    "year": 1989,
+    "rating": 94,
+    "developer": "Konami"
+  },
+  {
+    "name": "Hollow knight",
+    "year": 2017,
+    "rating": 97,
+    "developer": "team cherry"
+  },
+  {
+    "name" : "Pong",
+    "year": 1978,
+    "rating": 92,
+    "developer": "Atari"
+  }
+    ]}
