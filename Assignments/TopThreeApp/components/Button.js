@@ -14,17 +14,28 @@ export default function Button({ label , onPress, isActive}) {
 }
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    margin: 10,
+  },
   button: {
-    padding: 10,
-    margin: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     backgroundColor: 'gray',
     borderRadius: 5,
     alignItems: 'center',
   },
   activeButton: {
-    backgroundColor: 'blue',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: 'white',
+    alignItems: 'center',
+  },
+  pressedButton: {
+    backgroundColor: 'darkgray',
   },
   text: {
     color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
