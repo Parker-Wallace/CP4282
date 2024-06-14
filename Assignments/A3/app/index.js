@@ -1,14 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Image} from "react-native";
+import { Pressable, StyleSheet, View, Text} from "react-native";
 import React, { useState } from 'react';
-import Button from './components/Button';
-import Games from './components/Games';
-import gamedata from './assets/Data/Games.json'
+import Button from '../components/Button';
+import Games from '../components/Games';
+import gamedata from '../assets/Data/Games.json'
+import { Link } from "expo-router";
 
 
-castlevania = require("./assets/images/Castlevania_1_cover.png")
-hollow_knight = require("./assets/images/hollow_knight.jpg")
-pong = require("./assets/images/pong.png")
+castlevania = require("../assets/images/Castlevania_1_cover.png")
+hollow_knight = require("../assets/images/hollow_knight.jpg")
+pong = require("../assets/images/pong.png")
 
 
 export default function App() {
