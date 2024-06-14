@@ -5,7 +5,8 @@ export default function Games( props ) {
   return (
   <View style={styles.container}>
   <Text style={styles.name}>{props.games.gamedata[props.gameindex].name}</Text>
-    <Image source={props.gameimages[props.gameindex]} />
+    <Image source={{uri: `${props.games.gamedata[props.gameindex].imagelink}`}} 
+    style={{width: 400, height: 500}}/>
     <Text style={styles.year}>{props.games.gamedata[props.gameindex].year}</Text>
     <Text style={styles.rating}>{props.games.gamedata[props.gameindex].rating}</Text>
     <Text style={styles.developer}>{props.games.gamedata[props.gameindex].developer}</Text>
