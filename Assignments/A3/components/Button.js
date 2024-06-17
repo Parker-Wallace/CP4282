@@ -1,13 +1,17 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 
-
-
-
-export default function Button({ label , onPress, isActive}) {
+export default function Button({ label, onPress, isActive }) {
   return (
     <View style={styles.buttonContainer}>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={[styles.button, isActive && styles.activeButton]}>{label}</Text>
+      <Pressable
+        style={({ pressed }) => [
+          styles.button,
+          isActive && styles.activeButton,
+          pressed && styles.pressedButton,
+        ]}
+        onPress={onPress}
+      >
+        <Text style={styles.text}>{label}</Text>
       </Pressable>
     </View>
   );
@@ -25,13 +29,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    backgroundColor: 'white',
-    alignItems: 'center',
+    backgroundColor: '#3498db',
   },
   pressedButton: {
-    backgroundColor: 'darkgray',
+    backgroundColor: '#2980b9',
   },
   text: {
     color: 'white',
