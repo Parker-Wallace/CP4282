@@ -1,35 +1,27 @@
 import { StatusBar } from "expo-status-bar";
-import { Pressable, StyleSheet, View, Text} from "react-native";
-import React, { useState } from 'react';
+import { StyleSheet, View} from "react-native";
+import { useState, useContext } from 'react';
 import Button from '../components/Button';
 import Games from '../components/Games';
-import gamedata from '../assets/Data/Games.json'
-import { Link } from "expo-router";
+import { GameContext } from "../components/GameContext"
 
-
-castlevania = require("../assets/images/Castlevania_1_cover.png")
-hollow_knight = require("../assets/images/hollow_knight.jpg")
-pong = require("../assets/images/pong.png")
 
 
 export default function App() {
 
-const [imageindex, switchimage] = useState(0)
-const [active, setactive] = useState(null)
-
-function setImageIndex(index) {
-switchimage(index)
-setactive(index)
-}
+const {gameinfo, setgameinfo} = useContext(GameContext)
+const [index, switchindex] = useState(0)
 
 
-const images = [castlevania, hollow_knight, pong]
+
   return (
     <View style={styles.container}>
-        <Games games={gamedata} gameimages={images} gameindex={imageindex} />
-        <Button label="1" onPress={()=> setImageIndex(0)} isActive={active === 0}/>
-        <Button label="2" onPress={()=> setImageIndex(1)} isActive={active === 1}/>
-        <Button label="3" onPress={()=> setImageIndex(2)} isActive={active === 2}/>
+        <Games gameinfo={gameinfo} gameindex={index} />
+        <View style={styles.buttonBar}>
+        <Button label="1" onPress={()=> switchindex(0)} isActive={index === 0}/>
+        <Button label="2" onPress={()=> switchindex(1)} isActive={index === 1}/>
+        <Button label="3" onPress={()=> switchindex(2)} isActive={index === 2}/>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -42,4 +34,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttonBar: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  }
 });

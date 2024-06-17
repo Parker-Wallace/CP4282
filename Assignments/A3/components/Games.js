@@ -1,15 +1,13 @@
 import { Text, Image, StyleSheet, View } from 'react-native';
 
 export default function Games( props ) {
-
   return (
   <View style={styles.container}>
-  <Text style={styles.name}>{props.games.gamedata[props.gameindex].name}</Text>
-    <Image source={{uri: `${props.games.gamedata[props.gameindex].imagelink}`}} 
-    style={{width: 400, height: 500}}/>
-    <Text style={styles.year}>{props.games.gamedata[props.gameindex].year}</Text>
-    <Text style={styles.rating}>{props.games.gamedata[props.gameindex].rating}</Text>
-    <Text style={styles.developer}>{props.games.gamedata[props.gameindex].developer}</Text>
+    <Text style={styles.name}>{props.gameinfo[props.gameindex].name}</Text>
+    <Image source={{uri: `${props.gameinfo[props.gameindex].imagelink}`}} style={styles.image}/>
+    <Text style={styles.year}>{props.gameinfo[props.gameindex].year}</Text>
+    <Text style={styles.rating}>{props.gameinfo[props.gameindex].rating}</Text>
+    <Text style={styles.developer}>{props.gameinfo[props.gameindex].developer}</Text>
 </View>
   );
 }
@@ -27,8 +25,8 @@ const styles = StyleSheet.create ({
     marginBottom: 8,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 400,
+    height: 500,
     marginBottom: 8,
   },
   year: {
