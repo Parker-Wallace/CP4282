@@ -1,11 +1,10 @@
 import { Slot } from 'expo-router';
 import NavBar from '../components/NavBar'
 import { GameContext } from "../components/GameContext"
-import gamedata from "../assets/Data/Games.json"
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 export default function HomeLayout() {
-  const [gameinfo, setGameinfo] = useState(gamedata.gamedata)
+  const [gameinfo, setGameinfo] = useState(useContext(GameContext))
 
   return (
     <> 
