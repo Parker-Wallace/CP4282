@@ -7,6 +7,11 @@ const PizzaTranslator = () => {
   
 let Games = useContext(GameContext)
 const [index, switchindex] = useState(0)
+const [name   , newname   ] = useState("")
+const [year   , newyear   ] = useState("")
+const [image  , newimage  ] = useState("")
+const [dev    , newdev    ] = useState("")
+const [rating , newrating ] = useState("")
 
   return (
     <View style={styles.container}>
@@ -20,36 +25,40 @@ const [index, switchindex] = useState(0)
       <TextInput
         style={styles.input}
         placeholder="Paste Image URL here"
-        onChangeText={newimage => setcontent[index].imagelink(newimage)}
+        onChangeText={image => newimage(image)}
         placeholderTextColor="#888"
       />
             <TextInput
         style={styles.input}
         placeholder="New Name"
-        onChangeText={newname => setcontent[index].name(newname)}
+        onChangeText={name => newname(name)}
         placeholderTextColor="#888"
       />
             <TextInput
         style={styles.input}
         placeholder="New Rating"
-        onChangeText={newrating => setcontent[index].rating(newrating)}
+        onChangeText={rating => newrating(rating)}
         placeholderTextColor="#888"
       />
             <TextInput
         style={styles.input}
         placeholder="New Year"
-        onChangeText={newyear => setcontent[index].year(newyear)}
+        onChangeText={year => newyear(year)}
         placeholderTextColor="#888"
       />
         <TextInput
         style={styles.input}
         placeholder="New Developer"
-        onChangeText={newdev => setcontent[index].developer(newdev)}
+        onChangeText={dev => newdev(dev)}
         placeholderTextColor="#888"
       />
       <Button label={"submit"} onPress={() => {
-        console.log(gameupdate)
-        updategame(gameupdate)
+        console.log(Games.gameinfo.splice([index], 1, {
+          "name": name,
+          "year": year,
+          "rating": rating,
+          "developer": dev,
+          "imagelink":image }))
       }}></Button>
     </View>
   );
