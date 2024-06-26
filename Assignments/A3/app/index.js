@@ -1,9 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View} from "react-native";
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Button from '../components/Button';
 import Games from '../components/Games';
-import { GameContext } from "../components/GameContext";
 
 
 

@@ -3,9 +3,9 @@ import { Text, TextInput, View, StyleSheet } from 'react-native';
 import Button from '../components/Button';
 import { GameContext } from '../components/GameContext';
 
-const PizzaTranslator = () => {
+const update = () => {
   
-let {gameinfo, setGameinfo} = useContext(GameContext)
+const {gameinfo, setGameinfo} = useContext(GameContext)
 const [index, switchindex] = useState(0)
 const [newGame, updatenewGame] = useState({
   "name":"",
@@ -17,13 +17,13 @@ const [newGame, updatenewGame] = useState({
 
   return (
     <View style={styles.container}>
-      <h2>Item to Replace</h2>
+     <Text>Item to Replace</Text>
       <View style={styles.buttonBar}>  
       <Button label={gameinfo[0].name} onPress={()=> switchindex(0)} isActive={index === 0}/>
       <Button label={gameinfo[1].name} onPress={()=> switchindex(1)} isActive={index === 1}/>
       <Button label={gameinfo[2].name} onPress={()=> switchindex(2)} isActive={index === 2}/>
       </View>
-      <h2>new info</h2>
+      <Text>new info</Text>
       <TextInput
         style={styles.input}
         placeholder="Paste Image URL here"
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PizzaTranslator;
+export default update;
