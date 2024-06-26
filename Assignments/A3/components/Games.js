@@ -3,8 +3,7 @@ import { useContext } from 'react';
 import { GameContext } from "../components/GameContext"
 
 export default function Games( props ) {
-  const gameinfo = useContext(GameContext)
-  console.log(gameinfo)
+  const {gameinfo} = useContext(GameContext)
   return (
   <View style={styles.container}>
     <Text style={styles.name}>{gameinfo[props.gameindex].name}</Text>

@@ -16,10 +16,7 @@ const [index, switchindex] = useState(0)
 
   return (
     <View style={styles.container}>
-      <GameContext.Provider value={useContext(GameContext).gameinfo}>
-        <Games gameindex={index}/>
-      </GameContext.Provider>
-        
+        <Games gameindex={index}/>    
         <View style={styles.buttonBar}>
         <Button label="1" onPress={()=> switchindex(0)} isActive={index === 0}/>
         <Button label="2" onPress={()=> switchindex(1)} isActive={index === 1}/>

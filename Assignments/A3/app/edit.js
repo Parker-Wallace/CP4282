@@ -5,60 +5,60 @@ import { GameContext } from '../components/GameContext';
 
 const PizzaTranslator = () => {
   
-let Games = useContext(GameContext)
+let {gameinfo, setGameinfo} = useContext(GameContext)
 const [index, switchindex] = useState(0)
-const [name   , newname   ] = useState("")
-const [year   , newyear   ] = useState("")
-const [image  , newimage  ] = useState("")
-const [dev    , newdev    ] = useState("")
-const [rating , newrating ] = useState("")
+const [newGame, updatenewGame] = useState({
+  "name":"",
+  "year":"",
+  "dev":"",
+  "rating":"",
+  "imagelink":""
+})
 
   return (
     <View style={styles.container}>
       <h2>Item to Replace</h2>
       <View style={styles.buttonBar}>  
-      <Button label={Games.gameinfo[0].name} onPress={()=> switchindex(0)} isActive={index === 0}/>
-      <Button label={Games.gameinfo[1].name} onPress={()=> switchindex(1)} isActive={index === 1}/>
-      <Button label={Games.gameinfo[2].name} onPress={()=> switchindex(2)} isActive={index === 2}/>
+      <Button label={gameinfo[0].name} onPress={()=> switchindex(0)} isActive={index === 0}/>
+      <Button label={gameinfo[1].name} onPress={()=> switchindex(1)} isActive={index === 1}/>
+      <Button label={gameinfo[2].name} onPress={()=> switchindex(2)} isActive={index === 2}/>
       </View>
       <h2>new info</h2>
       <TextInput
         style={styles.input}
         placeholder="Paste Image URL here"
-        onChangeText={image => newimage(image)}
+        onChangeText={image => updatenewGame({...newGame, imagelink:image})}
         placeholderTextColor="#888"
       />
             <TextInput
         style={styles.input}
         placeholder="New Name"
-        onChangeText={name => newname(name)}
+        onChangeText={name => updatenewGame({...newGame, name:name})}
         placeholderTextColor="#888"
       />
             <TextInput
         style={styles.input}
         placeholder="New Rating"
-        onChangeText={rating => newrating(rating)}
+        onChangeText={rating => updatenewGame({...newGame, rating:rating})}
         placeholderTextColor="#888"
       />
             <TextInput
         style={styles.input}
         placeholder="New Year"
-        onChangeText={year => newyear(year)}
+        onChangeText={year => updatenewGame({...newGame, year:year})}
         placeholderTextColor="#888"
       />
         <TextInput
         style={styles.input}
         placeholder="New Developer"
-        onChangeText={dev => newdev(dev)}
+        onChangeText={dev => updatenewGame({...newGame, developer:dev})}
         placeholderTextColor="#888"
       />
       <Button label={"submit"} onPress={() => {
-        console.log(Games.gameinfo.splice([index], 1, {
-          "name": name,
-          "year": year,
-          "rating": rating,
-          "developer": dev,
-          "imagelink":image }))
+        GamesArray = [...gameinfo]
+        GamesArray[index] = newGame
+        setGameinfo(GamesArray)
+        
       }}></Button>
     </View>
   );
