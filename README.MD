@@ -1,13 +1,25 @@
-#CP4282
-## contains all the practise, assignment, and test code for CP4282 Programming for Mobile Devices
-### may also contain minor Projects and major projects depending on scope
+# Welcome to the CP4282 Programming with mobile devices
 
-topics Covered
-week 1
-- React Native 
-    - npx, npm, create react app
-    - utlizing react and its requisite libraries
-        -   babel
-week 2
-- react hooks
-    - use state
+> this course is a part of CNA's Software Development Co-op course and contains all distributable Materials.
+
+## Contents
+
+### Assignments
+
+| Page | Description|ReadME link|
+|---|---|---|
+|[Assignment 01: Intro to React](https://github.com/Parker-Wallace/CP4282/tree/master/Assignments/A1)|getting started with React to transition into React-Native|[README](https://github.com/Parker-Wallace/CP4282/tree/master/Assignments/A1README.md)|
+|[Assignment 02: Getting started with Expo](https://github.com/Parker-Wallace/CP4282/tree/master/Assignments/A2)|building a basic React-Native app using `expo`|[README](https://github.com/Parker-Wallace/CP4282/tree/master/Assignments/A2/README.md)|
+|[Assignment 03: the useContext hook](https://github.com/Parker-Wallace/CP4282/tree/master/Assignments/A3)|Working with `useContext`|[README](https://github.com/Parker-Wallace/CP4282/tree/master/Assignments/A3/README.md)|
+
+
+### ClassWork
+
+| Page |Description| Code |
+|---|---|---|
+
+### Tests
+
+| Code | Topics | Instructions |
+|---|---|---|
+
