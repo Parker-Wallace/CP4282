@@ -1,16 +1,25 @@
 import { Text, Image, StyleSheet, View } from 'react-native';
-import { useContext } from 'react';
-import { GameContext } from "../components/GameContext"
+import { useEffect, useState } from 'react';
+import { useSQLiteContext } from 'expo-sqlite';
 
-export default function Games( props ) {
-  const {gameinfo} = useContext(GameContext)
+export default function Games(props) {
+  const db = useSQLiteContext();
+  const [games, setGames] = useState([])
+
+  useEffect(() => {
+    async function setup() {
+      const result = await db.getAllAsync<Todo>('SELECT * FROM games');
+      setGames(result);
+    }
+    setup();
+  }, []);
   return (
   <View style={styles.container}>
-    <Text style={styles.name}>{gameinfo[props.gameindex].name}</Text>
-    <Image source={{uri: `${gameinfo[props.gameindex].imagelink}`}} style={styles.image}/>
-    <Text style={styles.year}>{gameinfo[props.gameindex].year}</Text>
-    <Text style={styles.rating}>{gameinfo[props.gameindex].rating}</Text>
-    <Text style={styles.developer}>{gameinfo[props.gameindex].developer}</Text>
+    <Text style={styles.name}>{games[props.gameindex].name}</Text>
+    <Image source={{uri: `${games[props.gameindex].imagelink}`}} style={styles.image}/>
+    <Text style={styles.year}>{games[props.gameindex].year}</Text>
+    <Text style={styles.rating}>{games[gamesprops.gameindex].rating}</Text>
+    <Text style={styles.developer}>{games[props.gameindex].developer}</Text>
 </View>
   );
 }

@@ -10,7 +10,8 @@ import Games from '../components/Games';
 export default function App() {
 
 const [index, switchindex] = useState(0)
-
+const db = useSQLiteContext();
+const { game, setGame } = useContext(MovieContext);
 
 
   return (
