@@ -5,24 +5,35 @@ import { useSQLiteContext } from 'expo-sqlite';
 export default function Games(props) {
   const db = useSQLiteContext();
   const [games, setGames] = useState([])
+  const [loading, isLoading] = useState(true)
 
   useEffect(() => {
     async function setup() {
-      const result = await db.getAllAsync<Todo>('SELECT * FROM games');
-      setGames(result);
+      const result = await db.getAllAsync('SELECT * FROM games');
+      setGames(result);  
+      isLoading(false)
     }
-    setup();
+    setup();      
+
   }, []);
-  return (
+
+
+    if (loading)
+      return (
+        <View style={styles.container}>
+        <Text style={styles.name}>Loading</Text>
+        
+    </View>)
+  else {return (
   <View style={styles.container}>
     <Text style={styles.name}>{games[props.gameindex].name}</Text>
     <Image source={{uri: `${games[props.gameindex].imagelink}`}} style={styles.image}/>
     <Text style={styles.year}>{games[props.gameindex].year}</Text>
-    <Text style={styles.rating}>{games[gamesprops.gameindex].rating}</Text>
+    <Text style={styles.rating}>{games[props.gameindex].rating}</Text>
     <Text style={styles.developer}>{games[props.gameindex].developer}</Text>
 </View>
   );
-}
+}}
 
 const styles = StyleSheet.create ({
   container: {
