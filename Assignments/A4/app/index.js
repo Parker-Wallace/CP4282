@@ -5,13 +5,10 @@ import Button from '../components/Button';
 import Games from '../components/Games';
 import { useSQLiteContext } from "expo-sqlite";
 
-
-
-
 export default function App() {
-
-const [index, switchindex] = useState(0)
 const db = useSQLiteContext();
+const [index, switchindex] = useState(0)
+const [loading, isLoading] = useState(true)
 
 
   return (
