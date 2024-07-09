@@ -25,6 +25,7 @@ async function initializeDB(db) {
   if( result.length == 0 ) {
       await db.runAsync('INSERT INTO games (name, year, rating, developer, imagelink) VALUES (?, ?, ?, ?, ?)', "Pong", "1997", "94", "Konami", "link" );
       await db.runAsync('INSERT INTO games (name, year, rating, developer, imagelink) VALUES (?, ?, ?, ?, ?)', "ROR2", "2014", "98", "Gearbox Games", "link" );
+      await db.runAsync('INSERT INTO games (name, year, rating, developer, imagelink) VALUES (?, ?, ?, ?, ?)', "Path of Exile", "2014", "67", "Grinding Gear Games", "link" );
   }
   const firstRow = await db.getFirstAsync('SELECT * FROM games');
   console.log(firstRow.name, firstRow.year, firstRow.actors, firstRow.imageIndex);
