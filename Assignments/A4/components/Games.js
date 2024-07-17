@@ -2,7 +2,7 @@ import { Text, Image, StyleSheet, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useSQLiteContext } from 'expo-sqlite';
 
-export default function Games(props) {
+export default function Games({props}) {
   const db = useSQLiteContext();
   const [games, setGames] = useState([])
   const [loading, isLoading] = useState(true)
@@ -26,11 +26,11 @@ export default function Games(props) {
     </View>)
   else {return (
   <View style={styles.container}>
-    <Text style={styles.name}>{games[props.gameindex].name}</Text>
-    <Image source={{uri: `${games[props.gameindex].imagelink}`}} style={styles.image}/>
-    <Text style={styles.year}>{games[props.gameindex].year}</Text>
-    <Text style={styles.rating}>{games[props.gameindex].rating}</Text>
-    <Text style={styles.developer}>{games[props.gameindex].developer}</Text>
+    <Text style={styles.name}>{props["name"]}</Text>
+    <Image source={{uri: `${props["imagelink"]}`}} style={styles.image}/>
+    <Text style={styles.year}>{props["year"]}</Text>
+    <Text style={styles.rating}>{props["rating"]}</Text>
+    <Text style={styles.developer}>{props["developer"]}</Text>
 </View>
   );
 }}
