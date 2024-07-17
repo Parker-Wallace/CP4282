@@ -5,41 +5,58 @@ import { GameContext } from '../components/GameContext';
 import { useSQLiteContext } from 'expo-sqlite';
 
 const update = () => {
-const [currentindex, switchindex] = useState(0)
+  //used for handling what button is currently pressed for ui and replacing entries
+  const [currentindex, switchindex] = useState(0)
 
 
-const [newGame, updatenewGame] = useState({
-  "name":"",
-  "year":"",
-  "dev":"",
-  "rating":"",
-  "imagelink":""
-})
+  const [newGame, updatenewGame] = useState({
+    "name":"", "year":"", "dev":"", "rating":"", "imagelink":""
+  })
 
-const db = useSQLiteContext();
-const [games, setGames] = useState([])
-const [loading, isLoading] = useState(true)
+  const db = useSQLiteContext();
+  const [games, setGames] = useState([])
+  const [loading, isLoading] = useState(true)
 
-const updategames = async (name, uri, year, rating, dev) => {
-  console.log(name, uri, year, rating, dev)
-  await db.runAsync(`
-    INSERT INTO games (name, year, rating, developer, imagelink) VALUES (?, ?, ?, ?, ?)`, name,year,rating,dev,uri);
-  }
+  /**
+   * Adds a new game entry to the games database.
+   * 
+   * @param {String} name the name of the new game
+   * @param {String} uri the URL of the image of the new game
+   * @param {String} year the year the game came out
+   * @param {String} rating the rating of the game
+   * @param {String} dev the games developer
+   */
+  const insertNewGame = async (name, uri, year, rating, dev) => {
+    console.log(name, uri, year, rating, dev)
+    await db.runAsync(`
+      INSERT INTO games (name, year, rating, developer, imagelink) VALUES (?, ?, ?, ?, ?)`, name,year,rating,dev,uri);
+    }
 
-const insertNewGame = async (name, uri, year, rating, dev, gameToReplace) => {
-  console.log(name, uri, year, rating, dev)
-  await db.runAsync(`
-    UPDATE games SET name = ?, year = ?, rating = ?, developer = ?, imagelink = ? WHERE name = ?`, name,year,rating,dev,uri,gameToReplace);
-  }
-useEffect(() => {
-  async function setup() {
-    const result = await db.getAllAsync('SELECT * FROM games');
-    setGames(result);  
-    isLoading(false)
-  }
-  setup();      
+  /**
+   * Replaces a game in the database with a new entry.
+   * 
+   * @param {String} name the name of the new game
+   * @param {String} uri the URL of the image of the new game
+   * @param {String} year the year the game came out
+   * @param {String} rating the rating of the game
+   * @param {String} dev the games developer
+   * @param {String} gameToReplace the name of the game whos entry will be replaced 
+   */
+  const updategames = async (name, uri, year, rating, dev, gameToReplace) => {
+    console.log(name, uri, year, rating, dev)
+    await db.runAsync(`
+      UPDATE games SET name = ?, year = ?, rating = ?, developer = ?, imagelink = ? WHERE name = ?`, name,year,rating,dev,uri,gameToReplace);
+    }
 
-}, []);
+  //does the initial load of the database
+  useEffect(() => {
+    async function setup() {
+      const result = await db.getAllAsync('SELECT * FROM games');
+      setGames(result);  
+      isLoading(false)
+    }
+    setup();      
+  }, []);
 
 
   if (loading)
@@ -86,11 +103,11 @@ else {return (
         placeholderTextColor="#888"
       />
       <Button label={"submit"} onPress={() => {
-        updategames(newGame.name, newGame.imagelink, newGame.year, newGame.rating, newGame.developer)
+        updategames(newGame.name, newGame.imagelink, newGame.year, newGame.rating, newGame.developer, games[currentindex].name)
         
       }}></Button>
             <Button label={"Add New"} onPress={() => {
-        insertNewGame(newGame.name, newGame.imagelink, newGame.year, newGame.rating, newGame.developer, games[currentindex].name)
+        insertNewGame(newGame.name, newGame.imagelink, newGame.year, newGame.rating, newGame.developer)
         
       }}></Button>
     </View>
