@@ -1,12 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
 import Button from '../components/Button';
 import { GameContext } from '../components/GameContext';
+import { useSQLiteContext } from 'expo-sqlite';
 
 const update = () => {
-  
-const {gameinfo, setGameinfo} = useContext(GameContext)
-const [index, switchindex] = useState(0)
+const [currentindex, switchindex] = useState(0)
+
+
 const [newGame, updatenewGame] = useState({
   "name":"",
   "year":"",
@@ -15,15 +16,45 @@ const [newGame, updatenewGame] = useState({
   "imagelink":""
 })
 
-  return (
+const db = useSQLiteContext();
+const [games, setGames] = useState([])
+const [loading, isLoading] = useState(true)
+
+const updategames = async (name, uri, year, rating, dev) => {
+  console.log(name, uri, year, rating, dev)
+  await db.runAsync(`
+    INSERT INTO games (name, year, rating, developer, imagelink) VALUES (?, ?, ?, ?, ?)`, name,year,rating,dev,uri);
+  }
+
+const insertNewGame = async (name, uri, year, rating, dev, gameToReplace) => {
+  console.log(name, uri, year, rating, dev)
+  await db.runAsync(`
+    UPDATE games SET name = ?, year = ?, rating = ?, developer = ?, imagelink = ? WHERE name = ?`, name,year,rating,dev,uri,gameToReplace);
+  }
+useEffect(() => {
+  async function setup() {
+    const result = await db.getAllAsync('SELECT * FROM games');
+    setGames(result);  
+    isLoading(false)
+  }
+  setup();      
+
+}, []);
+
+
+  if (loading)
+    return (
+      <View style={styles.container}>
+      <Text style={styles.name}>Loading</Text>
+      
+  </View>)
+else {return (
     <View style={styles.container}>
      <Text>Item to Replace</Text>
-      <View style={styles.buttonBar}>  
-      <Button label={gameinfo[0].name} onPress={()=> switchindex(0)} isActive={index === 0}/>
-      <Button label={gameinfo[1].name} onPress={()=> switchindex(1)} isActive={index === 1}/>
-      <Button label={gameinfo[2].name} onPress={()=> switchindex(2)} isActive={index === 2}/>
+      <View style={styles.buttonBar}> 
+      {games.map((game, index)=> 
+      <Button label={game.name} onPress={()=> switchindex(index)} isActive={currentindex === index}/>)}
       </View>
-      <Text>new info</Text>
       <TextInput
         style={styles.input}
         placeholder="Paste Image URL here"
@@ -55,14 +86,18 @@ const [newGame, updatenewGame] = useState({
         placeholderTextColor="#888"
       />
       <Button label={"submit"} onPress={() => {
-        GamesArray = [...gameinfo]
-        GamesArray[index] = newGame
-        setGameinfo(GamesArray)
+        updategames(newGame.name, newGame.imagelink, newGame.year, newGame.rating, newGame.developer)
+        
+      }}></Button>
+            <Button label={"Add New"} onPress={() => {
+        insertNewGame(newGame.name, newGame.imagelink, newGame.year, newGame.rating, newGame.developer, games[currentindex].name)
         
       }}></Button>
     </View>
   );
-};
+}}
+
+
 
 const styles = StyleSheet.create({
   container: {
