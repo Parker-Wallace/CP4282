@@ -1,28 +1,44 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View} from "react-native";
-import { useState } from 'react';
+import { StyleSheet, View, Text} from "react-native";
+import { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import Games from '../components/Games';
 import { useSQLiteContext } from "expo-sqlite";
 
 export default function App() {
 const db = useSQLiteContext();
-const [index, switchindex] = useState(0)
+const [currentindex, switchindex] = useState(0)
 const [loading, isLoading] = useState(true)
+const [games, setGames] = useState([])
 
 
+useEffect(() => {
+  async function setup() {
+    const result = await db.getAllAsync('SELECT * FROM games');
+    setGames(result);  
+    isLoading(false)
+  }
+  setup();      
+
+}, []);
+if (loading)
   return (
     <View style={styles.container}>
-        <Games gameindex={index}/>    
+    <Text style={styles.name}>Loading</Text>
+    
+</View>)
+else {
+  return (
+    <View style={styles.container}>
+        <Games props = {games[currentindex]}/>    
         <View style={styles.buttonBar}>
-        <Button label="1" onPress={()=> switchindex(0)} isActive={index === 0}/>
-        <Button label="2" onPress={()=> switchindex(1)} isActive={index === 1}/>
-        <Button label="3" onPress={()=> switchindex(2)} isActive={index === 2}/>
+          {games.map((game, index)=>
+          <Button label={index + 1} onPress={()=> switchindex(index)} isActive={index === currentindex}/>)}
       </View>
       <StatusBar style="auto" />
     </View>
   );
-}
+}}
 
 const styles = StyleSheet.create({
   container: {
