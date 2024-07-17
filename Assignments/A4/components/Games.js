@@ -1,30 +1,8 @@
 import { Text, Image, StyleSheet, View } from 'react-native';
-import { useEffect, useState } from 'react';
-import { useSQLiteContext } from 'expo-sqlite';
 
 export default function Games({props}) {
-  const db = useSQLiteContext();
-  const [games, setGames] = useState([])
-  const [loading, isLoading] = useState(true)
 
-  useEffect(() => {
-    async function setup() {
-      const result = await db.getAllAsync('SELECT * FROM games');
-      setGames(result);  
-      isLoading(false)
-    }
-    setup();      
-
-  }, []);
-
-
-    if (loading)
-      return (
-        <View style={styles.container}>
-        <Text style={styles.name}>Loading</Text>
-        
-    </View>)
-  else {return (
+{return (
   <View style={styles.container}>
     <Text style={styles.name}>{props["name"]}</Text>
     <Image source={{uri: `${props["imagelink"]}`}} style={styles.image}/>

@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
 import Button from '../components/Button';
-import { GameContext } from '../components/GameContext';
 import { useSQLiteContext } from 'expo-sqlite';
 
 const update = () => {

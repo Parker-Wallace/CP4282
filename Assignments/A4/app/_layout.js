@@ -1,18 +1,14 @@
 import { Slot } from 'expo-router';
 import NavBar from '../components/NavBar'
-import { GameContext } from "../components/GameContext"
 import { useState, useContext } from 'react';
 import {SQLiteProvider, useSQLiteContext, SQLiteDatabase} from 'expo-sqlite'
 
 export default function HomeLayout() {
-  const [gameinfo, setGameinfo] = useState(useContext(GameContext))
 
   return (
     <SQLiteProvider databaseName='games.db' onInit={initializeDB}> 
     <NavBar/>
-    <GameContext.Provider value={{gameinfo, setGameinfo}}> 
   <Slot />
-  </GameContext.Provider>
   </SQLiteProvider>
 );
 }
