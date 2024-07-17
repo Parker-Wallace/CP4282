@@ -19,7 +19,6 @@ export default function HomeLayout() {
 async function initializeDB(db) {
   await db.execAsync(`
       PRAGMA journal_mode = 'wal';
-      Drop table games;
       CREATE TABLE IF NOT EXISTS games (name TEXT PRIMARY KEY NOT NULL, year TEXT NOT NULL, rating TEXT NOT NULL, developer TEXT NOT NULL, imagelink TEXT NOT NULL);
   `);
    const result = await db.getAllAsync('SELECT * FROM games');
