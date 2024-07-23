@@ -19,21 +19,24 @@ useEffect(() => {
     isLoading(false)
   }
   setup();      
-
 }, []);
-if (loading)
+
+
+if (loading) {
   return (
     <View style={styles.container}>
     <Text style={styles.name}>Loading</Text>
-    
-</View>)
-else {
+    </View>
+    );
+  } else {
   return (
     <View style={styles.container}>
         <Games props = {games[currentindex]}/>    
-        <View style={styles.buttonBar}>
-          {games.map((game, index)=>
-          <Button label={index + 1} onPress={()=> switchindex(index)} isActive={index === currentindex}/>)}
+      <View style={styles.navigationButtons}>
+        <Button label={"<"} onPress={()=> switchindex(Math.max(currentindex - 1, 0))}></Button>
+        <Text style={styles.label}>Ranking: {currentindex + 1}</Text>
+        <Button label={'>'} onPress={()=> switchindex(Math.min(currentindex + 1, games.length - 1))}></Button>
+        
       </View>
       <StatusBar style="auto" />
     </View>
@@ -47,8 +50,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonBar: {
+  navigationButtons: {
     flexDirection: "row",
-    justifyContent: "space-around",
-  }
+    justifyContent: "space-between",
+    marginTop: 20,
+  },
+  label: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 13,
+    borderRadius: 5,
+
+    fontSize: 20,
+    color: '#333',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
 });

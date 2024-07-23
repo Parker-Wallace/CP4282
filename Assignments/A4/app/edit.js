@@ -47,6 +47,11 @@ const update = () => {
       UPDATE games SET name = ?, year = ?, rating = ?, developer = ?, imagelink = ? WHERE name = ?`, name,year,rating,dev,uri,gameToReplace);
     }
 
+  const removeGame = async (name) => {
+    await db.runAsync(`
+      DELETE FROM games WHERE name = ? `, name)
+  }
+
   //does the initial load of the database
   useEffect(() => {
     async function setup() {
@@ -67,10 +72,11 @@ const update = () => {
 else {return (
     <View style={styles.container}>
      <Text>Item to Replace</Text>
-      <View style={styles.buttonBar}> 
-      {games.map((game, index)=> 
-      <Button label={game.name} onPress={()=> switchindex(index)} isActive={currentindex === index}/>)}
-      </View>
+     <View style={styles.buttonBar}> 
+     <Button label={"<"} onPress={()=> switchindex(Math.max(currentindex - 1, 0))}></Button>
+        <Text style={styles.label}>{games[currentindex].name}</Text>
+        <Button label={'>'} onPress={()=> switchindex(Math.min(currentindex + 1, games.length - 1))}></Button>
+        </View>
       <TextInput
         style={styles.input}
         placeholder="Paste Image URL here"
@@ -109,6 +115,10 @@ else {return (
         insertNewGame(newGame.name, newGame.imagelink, newGame.year, newGame.rating, newGame.developer)
         
       }}></Button>
+                  <Button label={"Delete"} onPress={() => {
+        removeGame(games[currentindex].name)
+        
+      }}></Button>
     </View>
   );
 }}
@@ -116,6 +126,17 @@ else {return (
 
 
 const styles = StyleSheet.create({
+  label: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 13,
+    borderRadius: 5,
+    width: 200,
+    fontSize: 20,
+    color: '#333',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
   container: {
     padding: 20,
     alignItems: 'center',
